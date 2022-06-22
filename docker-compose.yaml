@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  rise_backend:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ./src:/rise_backend/src
+    
+    env_file:
+      - ./.env
+
+    ports:
+      - 4000:4000
+  
+  rise_db:
+    platform: linux/amd64
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'brad_practice'
+      MYSQL_USERNAME: 'brad'
+      MYSQL_PASSWORD: '00000000'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    cap_add:
+      - SYS_NICE
+    ports:
+      - 3306:3306
