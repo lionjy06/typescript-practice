@@ -1,11 +1,12 @@
 import express from 'express'
 import { Request, Response } from 'express'
 import dotenv from 'dotenv-flow'
-import { createConnection, DataSource, Logger } from "typeorm"
+import { DataSource, Logger } from "typeorm"
 import loger from 'morgan'
-import api from './apis/router'
+import rise from './apis/router'
 import 'reflect-metadata'
 import { User } from './apis/entities/user.entity'
+import { Product } from './apis/entities/product.entity'
 
 
 const app = express()
@@ -19,7 +20,7 @@ export const AppDataSource = new DataSource({
     "password": "00000000",
     "database": "brad_practice",
     "entities": [
-       __dirname + './apis/entities/*.entity.*'
+       User,Product
     ],
     "synchronize": true,
     "logging":true
@@ -35,7 +36,7 @@ AppDataSource.initialize()
 app.use(loger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use('/api',api)
+app.use('/rise',rise)
 
 
 app.get('/',(req,res) => {

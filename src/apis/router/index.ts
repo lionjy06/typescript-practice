@@ -1,8 +1,10 @@
 import { Router } from "express";
+import productRouter from "./product";
 import userRouter from "./user";
 
-const api = Router()
+const rise = Router()
 
-api.use('/user',userRouter)
+rise.use('/user',userRouter)
+rise.use('/product',productRouter)
 
-export default api
+export default rise
