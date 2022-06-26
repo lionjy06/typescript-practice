@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, ManyToOne, JoinColumn } from 'typeorm'
 import 'reflect-metadata'
+import { User } from './user.entity'
 
 @Entity()
 export class Product extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id:string
+    @PrimaryGeneratedColumn('increment')
+    id:number
 
     @Column()
     name:string
@@ -14,4 +15,8 @@ export class Product extends BaseEntity{
 
     @Column()
     description:string
+
+    @ManyToOne(() => User, (user) => user.product)
+    @JoinColumn({name:'userId'})
+    user:User
 }

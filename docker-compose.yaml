@@ -31,3 +31,11 @@ services:
       - SYS_NICE
     ports:
       - 3306:3306
+
+
+  elasticsearch:
+    image: elasticsearch:7.17.0
+    environment:
+      discovery.type: single-node
+    ports:
+      - 9200:9200

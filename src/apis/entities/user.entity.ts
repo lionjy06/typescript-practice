@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity} from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, OneToMany} from 'typeorm'
 import 'reflect-metadata'
+import { Product } from './product.entity'
 
 @Entity()
 export class User extends BaseEntity {
@@ -20,4 +21,8 @@ export class User extends BaseEntity {
 
     @Column()
     age: number
+
+
+    @OneToMany(() => Product, (product) => product.user)
+    product:Product[]
 }
